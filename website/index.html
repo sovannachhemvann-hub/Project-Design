@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matcha & Coffee | Cozy Premium Café Experience</title>
+    <link rel="icon" type="image/x-icon" href="/Photo/logo.jpg">
+    <!-- Google Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@700;800&family=Alex+Brush&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        matcha: {
+                            DEFAULT: '#1A8218',
+                            light: '#EAF5EA',
+                            dark: '#115410',
+                        },
+                        coffee: {
+                            DEFAULT: '#6D4E35',
+                            light: '#F0EBE6',
+                            dark: '#483322',
+                        },
+                        coffeered: {
+                            DEFAULT: '#A62424',
+                            light: '#FCEAEA',
+                        },
+                        cream: {
+                            DEFAULT: '#F7F3EE',
+                            dark: '#121212',
+                            cardDark: '#1E1E1E',
+                        },
+                        darktext: {
+                            DEFAULT: '#1E1E1E',
+                            light: '#F7F3EE',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['"Abhaya Libre"', 'serif'],
+                        accent: ['"Alex Brush"', 'cursive'],
+                        body: ['"Poppins"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F7F3EE;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1A8218;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6D4E35;
+        }
+        
+        /* Smooth page fade transition */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Whisk Animation for Loader */
+        @keyframes whisk {
+            0%, 100% { transform: rotate(-15deg) translateY(0); }
+            50% { transform: rotate(15deg) translateY(-8px); }
+        }
+        .whisk-animation {
+            animation: whisk 1.2s ease-in-out infinite;
+        }
+
+        /* Glassmorphism utility */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+        .dark .glass-panel {
+            background: rgba(30, 30, 30, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-cream dark:bg-cream-dark text-darktext dark:text-darktext-light font-body transition-colors duration-300 min-h-screen flex flex-col overflow-x-hidden">
+
+    <!-- Loader Overlay -->
+    <div id="loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-cream dark:bg-cream-dark transition-opacity duration-500">
+        <div class="relative flex flex-col items-center">
+            <!-- Intersecting cup & tea bowl visual animation -->
+            <div class="flex items-center space-x-4 mb-4">
+                <div class="w-16 h-16 rounded-full border-4 border-matcha flex items-center justify-center whisk-animation">
+                    <i class="fa-solid fa-leaf text-matcha text-2xl"></i>
+                </div>
+                <div class="w-16 h-16 rounded-b-full rounded-t-sm border-4 border-coffee flex items-center justify-center relative">
+                    <div class="absolute top-2 left-full w-3 h-6 border-4 border-l-0 border-coffee rounded-r-full"></div>
+                    <i class="fa-solid fa-mug-hot text-coffee text-2xl"></i>
+                </div>
+            </div>
+            <h1 class="font-heading text-3xl font-bold text-coffee dark:text-cream mb-1">Matcha & Coffee</h1>
+            <p class="font-accent text-2xl text-matcha mb-4">Whisking & Brewing Calmness</p>
+            <div class="w-48 bg-gray-200 dark:bg-neutral-800 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-matcha h-full w-0 transition-all duration-1000 ease-out" id="loader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 w-full transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <!-- Brand Logo -->
+                <!-- <a href="Web\Photo\logo.jpg"></a> -->
+            <a href="#" onclick="switchTab('home')" class="flex items-center space-x-2 group focus:outline-none">
+                <div class="relative flex items-center justify-center">
+                    <span class="text-matcha text-2xl font-bold group-hover:rotate-12 transition-transform duration-300"><i class="fa-solid fa-leaf"></i></span>
+                    <span class="text-coffee text-xl font-bold ml-1 group-hover:-rotate-12 transition-transform duration-300"><i class="fa-solid fa-mug-hot"></i></span>
+                </div> 
+                
+                <div>
+                    <span class="font-heading text-2xl font-bold tracking-tight text-coffee dark:text-cream block leading-none">Matcha & Coffee</span>
+                    <span class="font-accent text-lg text-matcha block -mt-1">cozy aesthetics</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Menu -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <button onclick="switchTab('home')" class="nav-link font-medium hover:text-matcha transition-colors py-2 border-b-2 border-transparent" id="nav-home">Home</button>
+                <button onclick="switchTab('menu')" class="nav-link font-medium hover:text-matcha transition-colors py-2 border-b-2 border-transparent" id="nav-menu">Menu</button>
+                <button onclick="switchTab('promo')" class="nav-link font-medium hover:text-matcha transition-colors py-2 border-b-2 border-transparent" id="nav-promo">Offers</button>
+                <button onclick="switchTab('story')" class="nav-link font-medium hover:text-matcha transition-colors py-2 border-b-2 border-transparent" id="nav-story">Our Story</button>
+                <button onclick="switchTab('contact')" class="nav-link font-medium hover:text-matcha transition-colors py-2 border-b-2 border-transparent" id="nav-contact">Find Us</button>
+            </nav>
+
+            <!-- Utility Controls (Theme, Cart, Mobile Menu Button) -->
+            <div class="flex items-center space-x-4">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/50 dark:hover:bg-neutral-800 transition-colors focus:outline-none" aria-label="Toggle Dark Mode">
+                    <i id="theme-icon" class="fa-solid fa-moon text-lg text-coffee dark:text-cream"></i>
+                </button>
+
+                <!-- Shopping Cart Icon -->
+                <button onclick="toggleCart()" class="relative w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/50 dark:hover:bg-neutral-800 transition-colors focus:outline-none" aria-label="View Shopping Cart">
+                    <i class="fa-solid fa-bag-shopping text-lg text-coffee dark:text-cream"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-coffeered text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center hidden scale-100 transition-transform duration-300">0</span>
+                </button>
+
+                <!-- Mobile Menu Toggle Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/50 dark:hover:bg-neutral-800 transition-colors focus:outline-none" aria-label="Open Mobile Menu">
+                    <i id="mobile-menu-icon" class="fa-solid fa-bars text-lg text-coffee dark:text-cream"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 dark:border-neutral-800 bg-cream/95 dark:bg-cream-dark/95 backdrop-blur-md transition-all duration-300">
+            <div class="px-4 pt-2 pb-6 space-y-3 shadow-lg">
+                <button onclick="switchTab('home')" class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium hover:bg-matcha/10 hover:text-matcha transition-colors">Home</button>
+                <button onclick="switchTab('menu')" class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium hover:bg-matcha/10 hover:text-matcha transition-colors">Menu</button>
+                <button onclick="switchTab('promo')" class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium hover:bg-matcha/10 hover:text-matcha transition-colors">Offers & Promotions</button>
+                <button onclick="switchTab('story')" class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium hover:bg-matcha/10 hover:text-matcha transition-colors">Our Story</button>
+                <button onclick="switchTab('contact')" class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium hover:bg-matcha/10 hover:text-matcha transition-colors">Find Us</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Shopping Cart Sidebar Overlay -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-white dark:bg-neutral-900 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col hidden">
+        <!-- Cart Header -->
+        <div class="p-6 border-b border-gray-100 dark:border-neutral-800 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-bag-shopping text-matcha text-xl"></i>
+                <h3 class="text-xl font-heading font-bold">Your Order Bag</h3>
+            </div>
+            <button onclick="toggleCart()" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items Container -->
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- Dynamic Cart Items injected here -->
+            <div id="empty-cart-view" class="h-full flex flex-col items-center justify-center text-center">
+                <div class="w-24 h-24 rounded-full bg-cream dark:bg-neutral-800 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-coffee-bean text-coffee text-3xl opacity-50"></i>
+                </div>
+                <h4 class="font-heading text-lg font-bold mb-1">Your bag is empty</h4>
+                <p class="text-sm text-gray-500 max-w-xs mb-6">Explore our crafted combinations of rich premium espresso & calm stone-ground matcha.</p>
+                <button onclick="switchTab('menu'); toggleCart();" class="bg-matcha hover:bg-matcha-dark text-white px-6 py-2.5 rounded-full font-medium transition-colors text-sm">
+                    Browse Menu
+                </button>
+            </div>
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="p-6 border-t border-gray-100 dark:border-neutral-800 bg-gray-50 dark:bg-neutral-800/50 space-y-4">
+            <!-- Promo Code Input -->
+            <div>
+                <label for="promo-input" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Apply Promo Code</label>
+                <div class="flex space-x-2">
+                    <input type="text" id="promo-input" placeholder="e.g. COZYMATCHA" class="flex-1 px-4 py-2 border border-gray-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 rounded-lg text-sm focus:outline-none focus:border-matcha transition-colors uppercase">
+                    <button onclick="applyPromoCode()" class="bg-coffee hover:bg-coffee-dark text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">Apply</button>
+                </div>
+                <p id="promo-message" class="text-xs mt-1 hidden"></p>
+            </div>
+
+            <!-- Financials Summary -->
+            <div class="space-y-2">
+                <div class="flex justify-between text-sm">
+                    <span class="text-gray-500">Subtotal</span>
+                    <span id="cart-subtotal" class="font-medium">$0.00</span>
+                </div>
+                <div id="cart-discount-row" class="flex justify-between text-sm text-matcha hidden">
+                    <span>Discount (<span id="discount-percent">0%</span>)</span>
+                    <span id="cart-discount">-$0.00</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                    <span class="text-gray-500">Est. Tax (8%)</span>
+                    <span id="cart-tax" class="font-medium">$0.00</span>
+                </div>
+                <div class="border-t border-gray-200 dark:border-neutral-700 pt-2 flex justify-between">
+                    <span class="font-heading text-lg font-bold">Total Amount</span>
+                    <span id="cart-total" class="font-heading text-xl font-bold text-matcha">$0.00</span>
+                </div>
+            </div>
+
+            <!-- Checkout Button -->
+            <button onclick="openCheckoutModal()" class="w-full bg-matcha hover:bg-matcha-dark text-white py-3.5 rounded-xl font-bold text-center transition-colors shadow-lg shadow-matcha/20 flex items-center justify-center space-x-2">
+                <span>Secure Checkout</span>
+                <i class="fa-solid fa-arrow-right text-sm"></i>
+            </button>
+        </div>
+    </div>
+    <!-- Cart Backdrop -->
+    <div id="cart-backdrop" onclick="toggleCart()" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden transition-opacity duration-300"></div>
+
+    <!-- Main Application Containers -->
+    <main class="flex-grow">
+        
+        <!-- SECTION 1: HOME PAGE -->
+        <section id="tab-home" class="tab-content fade-in">
+            <!-- Hero Landing Frame -->
+            <div class="relative overflow-hidden bg-cream-dark dark:bg-neutral-950 py-16 sm:py-24 lg:py-32">
+                <!-- Visual absolute background accents -->
+                <div class="absolute inset-0 z-0 opacity-10 dark:opacity-5">
+                    <div class="absolute top-10 left-10 w-96 h-96 rounded-full bg-matcha filter blur-3xl"></div>
+                    <div class="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-coffee filter blur-3xl"></div>
+                </div>
+                
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="lg:grid lg:grid-cols-12 lg:gap-12 items-center">
+                        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                            <div class="inline-flex items-center space-x-2 bg-matcha-light dark:bg-matcha-dark/20 text-matcha border border-matcha/20 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                <span>Pure Stone-Ground Matcha meets Specialty Espresso</span>
+                            </div>
+                            <h2 class="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-tight text-neutral-900 dark:text-white">
+                                Fresh Matcha <br>& <span class="text-coffee">Premium Coffee</span>
+                            </h2>
+                            <p class="font-accent text-3xl sm:text-4xl text-matcha -mt-2">Experience the perfect blend of calm and rich caffeine</p>
+                            <p class="max-w-2xl mx-auto lg:mx-0 text-base sm:text-lg text-gray-600 dark:text-gray-300">
+                                Step into a cozy visual sanctuary where premium organic Japanese Uji Matcha meets our artisanal, hand-selected medium roast coffee beans. Crafted for clarity, focus, and modern aesthetic spaces.
+                            </p>
+                            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                                <button onclick="switchTab('menu')" class="w-full sm:w-auto bg-matcha hover:bg-matcha-dark text-white px-8 py-4 rounded-full font-semibold transition-all shadow-lg shadow-matcha/20 hover:scale-105">
+                                    <i class="fa-solid fa-mug-saucer mr-2"></i> Order Now
+                                </button>
+                                <button onclick="switchTab('story')" class="w-full sm:w-auto bg-white/80 dark:bg-neutral-800/80 hover:bg-white dark:hover:bg-neutral-800 text-coffee dark:text-cream border border-coffee/20 dark:border-white/10 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105">
+                                    Our Story
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Hero Interactive Image Banner -->
+                        <div class="lg:col-span-5 mt-12 lg:mt-0 relative flex justify-center">
+                            <div class="relative w-80 sm:w-96 h-90 lg:h-[450px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-neutral-800 transition-transform duration-500 hover:rotate-2">
+                                <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=800&q=80" alt="Beautiful cafe matcha and coffee aesthetics" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+                                    <p class="font-accent text-3xl text-matcha-light">Signature Mix</p>
+                                    <h4 class="font-heading text-2xl font-bold">The Matcha Espresso Fusion</h4>
+                                    <p class="text-xs text-gray-200 mt-1">Rich espresso layered over refreshing iced sweet matcha milk.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Signature Products Section -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
+                    <span class="font-accent text-3xl text-matcha">Artfully Prepared</span>
+                    <h3 class="font-heading text-4xl font-bold text-coffee dark:text-cream">Our Signature Specialties</h3>
+                    <p class="text-gray-500 text-sm">Crafted meticulously by expert baristas with certified organic Japanese stone-ground tea leaves and farm-direct single-origin coffee beans.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Featured Product Card 1 -->
+                    <div class="bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col border border-gray-100 dark:border-neutral-800">
+                        <div class="h-64 relative overflow-hidden group">
+                            <img src="https://i.pinimg.com/1200x/45/9a/fb/459afbc3f9000c8001ab06e67549b924.jpg" alt="Ceremonial Matcha Latte" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-4 right-4 bg-matcha text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wider">Premium Grade</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-heading text-2xl font-bold mb-1">Ceremonial Uji Matcha Latte</h4>
+                                <p class="text-xs text-gray-500 dark:text-neutral-400 line-clamp-2 mb-4">Pure stone-ground organic tea whisked traditionally to vibrant green and served with velvet texture oat milk.</p>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="font-heading text-xl font-bold text-matcha">$5.95</span>
+                                <button onclick="addFeaturedToCart(1, 'Ceremonial Uji Matcha Latte', 5.95, 'https://i.pinimg.com/1200x/45/9a/fb/459afbc3f9000c8001ab06e67549b924.jpg')" class="bg-matcha hover:bg-matcha-dark text-white px-4 py-2 rounded-full text-xs font-semibold transition-colors flex items-center space-x-1.5">
+                                    <i class="fa-solid fa-plus text-[10px]"></i> <span>Add to Bag</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Featured Product Card 2 -->
+                    <div class="bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col border border-gray-100 dark:border-neutral-800">
+                        <div class="h-64 relative overflow-hidden group">
+                            <img src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=600&q=80" alt="Matcha Espresso Fusion" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-4 right-4 bg-coffeered text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wider">Most Popular</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-heading text-2xl font-bold mb-1">Matcha Espresso Fusion</h4>
+                                <p class="text-xs text-gray-500 dark:text-neutral-400 line-clamp-2 mb-4">A mesmerizing aesthetic layer of organic matcha milk, artisanal vanilla syrup, capped with double espresso.</p>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="font-heading text-xl font-bold text-coffee dark:text-cream">$6.45</span>
+                                <button onclick="addFeaturedToCart(3, 'Matcha Espresso Fusion', 6.45, 'https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=600&q=80')" class="bg-matcha hover:bg-matcha-dark text-white px-4 py-2 rounded-full text-xs font-semibold transition-colors flex items-center space-x-1.5">
+                                    <i class="fa-solid fa-plus text-[10px]"></i> <span>Add to Bag</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Featured Product Card 3 -->
+                    <div class="bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col border border-gray-100 dark:border-neutral-800">
+                        <div class="h-64 relative overflow-hidden group">
+                            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Artisanal Rose Espresso" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-4 right-4 bg-coffee text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wider">House Special</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-heading text-2xl font-bold mb-1">Artisanal Rose Espresso</h4>
+                                <p class="text-xs text-gray-500 dark:text-neutral-400 line-clamp-2 mb-4">Double shot of single-origin light roast espresso with fresh organic milk and subtle hints of edible botanical rose extract.</p>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="font-heading text-xl font-bold text-coffee dark:text-cream">$5.75</span>
+                                <button onclick="addFeaturedToCart(2, 'Artisanal Rose Espresso', 5.75, 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80')" class="bg-matcha hover:bg-matcha-dark text-white px-4 py-2 rounded-full text-xs font-semibold transition-colors flex items-center space-x-1.5">
+                                    <i class="fa-solid fa-plus text-[10px]"></i> <span>Add to Bag</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Choose Us / Values Section -->
+            <div class="bg-matcha-light dark:bg-neutral-900/40 py-20 border-y border-matcha/10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
+                        <span class="font-accent text-3xl text-matcha">A Conscious Indulgence</span>
+                        <h3 class="font-heading text-4xl font-bold text-coffee dark:text-cream">Crafted with Conscious Care</h3>
+                        <p class="text-gray-500 text-sm">Every single cup serves a higher promise of quality, ethical sourcing, and physical harmony.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        <div class="text-center space-y-3 p-6 bg-white dark:bg-neutral-900 rounded-2xl shadow-sm border border-gray-100 dark:border-neutral-800">
+                            <div class="w-16 h-16 rounded-full bg-matcha-light dark:bg-matcha-dark/20 text-matcha flex items-center justify-center mx-auto mb-4">
+                                <i class="fa-solid fa-seedling text-2xl"></i>
+                            </div>
+                            <h4 class="font-heading text-xl font-bold">100% Organic</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed">Sourced from small, family-run fields in Uji and Kyoto, strictly harvested without dynamic chemical pesticides.</p>
+                        </div>
+
+                        <div class="text-center space-y-3 p-6 bg-white dark:bg-neutral-900 rounded-2xl shadow-sm border border-gray-100 dark:border-neutral-800">
+                            <div class="w-16 h-16 rounded-full bg-coffee-light dark:bg-coffee-dark/20 text-coffee flex items-center justify-center mx-auto mb-4">
+                                <i class="fa-solid fa-fire text-2xl"></i>
+                            </div>
+                            <h4 class="font-heading text-xl font-bold">In-House Small Roast</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed">Our premium coffee beans are roasted weekly in careful micro-batches to extract sweet notes and rich oils.</p>
+                        </div>
+
+                        <div class="text-center space-y-3 p-6 bg-white dark:bg-neutral-900 rounded-2xl shadow-sm border border-gray-100 dark:border-neutral-800">
+                            <div class="w-16 h-16 rounded-full bg-red-50 dark:bg-red-950/20 text-coffeered flex items-center justify-center mx-auto mb-4">
+                                <i class="fa-solid fa-couch text-2xl"></i>
+                            </div>
+                            <h4 class="font-heading text-xl font-bold">Calm & Cozy Vibes</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed">Modern design layout inspired by Japanese wabi-sabi minimalism, designed to be a safe visual shelter.</p>
+                        </div>
+
+                        <div class="text-center space-y-3 p-6 bg-white dark:bg-neutral-900 rounded-2xl shadow-sm border border-gray-100 dark:border-neutral-800">
+                            <div class="w-16 h-16 rounded-full bg-matcha-light dark:bg-matcha-dark/20 text-matcha flex items-center justify-center mx-auto mb-4">
+                                <i class="fa-solid fa-bolt text-2xl"></i>
+                            </div>
+                            <h4 class="font-heading text-xl font-bold">L-Theanine Energy</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed">Uniquely balanced caffeine profile giving long-lasting clean focus without standard coffee jitters.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Testimonials -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
+                    <span class="font-accent text-3xl text-matcha">Loved by patrons</span>
+                    <h3 class="font-heading text-4xl font-bold text-coffee dark:text-cream">Sips of Happiness</h3>
+                    <p class="text-gray-500 text-sm">Hear why our modern cozy visual aesthetic and taste profile keep customers coming back.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Review 1 -->
+                    <div class="bg-white dark:bg-neutral-900 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-neutral-800 relative">
+                        <div class="flex items-center space-x-1.5 text-yellow-400 mb-4">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 italic mb-6">
+                            "The Matcha Espresso Fusion is literally out of this world! The beautiful green gradient, the smooth rich coffee, the cozy smell of the shop. This place is an Instagrammer's dream, but with real high-tier drink quality."
+                        </p>
+                        <div class="flex items-center space-x-3 border-t border-gray-50 dark:border-neutral-800 pt-4">
+                            <img src=https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=400&q=80" alt="Haru Tanaka" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <h5 class="text-sm font-bold">Haru Tanaka</h5>
+                                <p class="text-[11px] text-gray-400">Ceremonial Enthusiast</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-white dark:bg-neutral-900 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-neutral-800 relative">
+                        <div class="flex items-center space-x-1.5 text-yellow-400 mb-4">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 italic mb-6">
+                            "An absolute cozy sanctuary in the city. The matcha whisks are authentic bamboo, and their matcha cakes are soft with just the right level of natural bittersweetness. Perfect place to write or read."
+                        </p>
+                        <div class="flex items-center space-x-3 border-t border-gray-50 dark:border-neutral-800 pt-4">
+                            <img src="https://img.magnific.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?semt=ais_hybrid&w=740&q=80" alt="Lucas Bennett" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <h5 class="text-sm font-bold">Lucas Bennett</h5>
+                                <p class="text-[11px] text-gray-400">Coffee Critic</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-white dark:bg-neutral-900 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-neutral-800 relative">
+                        <div class="flex items-center space-x-1.5 text-yellow-400 mb-4">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 italic mb-6">
+                            "Their BOGO promotions on limited matcha drinks are incredible! I bought the Seasonal Cherry Blossom Matcha, it was incredible. Warm service, aesthetic packaging, and smooth organic fuel."
+                        </p>
+                        <div class="flex items-center space-x-3 border-t border-gray-50 dark:border-neutral-800 pt-4">
+                            <img src="https://img.magnific.com/free-photo/happy-man-student-with-afro-hairdo-shows-white-teeth-being-good-mood-after-classes_273609-16608.jpg?semt=ais_hybrid&w=740&q=80" alt="Aimi Sato" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <h5 class="text-sm font-bold">Aimi Sato</h5>
+                                <p class="text-[11px] text-gray-400">Daily Patron</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instagram Grid Section -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+                <div class="text-center max-w-2xl mx-auto mb-12 space-y-2">
+                    <span class="font-accent text-3xl text-matcha">Follow our feed</span>
+                    <h3 class="font-heading text-4xl font-bold text-coffee dark:text-cream">#MatchaAndCoffeeVibes</h3>
+                    <p class="text-gray-500 text-sm">Join our gorgeous visual community of mindful drinkers sharing peaceful, slow-living moments.</p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div class="relative group aspect-square rounded-2xl overflow-hidden shadow-sm">
+                        <img src="https://i.pinimg.com/1200x/45/9a/fb/459afbc3f9000c8001ab06e67549b924.jpg" alt="Insta 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-lg">
+                            <i class="fa-brands fa-instagram mr-1.5"></i> <span class="font-bold">@matcha.coffee</span>
+                        </div>
+                    </div>
+                    <div class="relative group aspect-square rounded-2xl overflow-hidden shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=400&q=80" alt="Insta 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-lg">
+                            <i class="fa-brands fa-instagram mr-1.5"></i> <span class="font-bold">@matcha.coffee</span>
+                        </div>
+                    </div>
+                    <div class="relative group aspect-square rounded-2xl overflow-hidden shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=400&q=80" alt="Insta 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-lg">
+                            <i class="fa-brands fa-instagram mr-1.5"></i> <span class="font-bold">@matcha.coffee</span>
+                        </div>
+                    </div>
+                    <div class="relative group aspect-square rounded-2xl overflow-hidden shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=400&q=80" alt="Insta 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-lg">
+                            <i class="fa-brands fa-instagram mr-1.5"></i> <span class="font-bold">@matcha.coffee</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: PRODUCT MENU PAGE -->
+        <section id="tab-menu" class="tab-content fade-in hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="text-center max-w-xl mx-auto mb-10 space-y-2">
+                    <span class="font-accent text-3xl text-matcha">Aesthetic Menu</span>
+                    <h3 class="font-heading text-4xl font-bold text-coffee dark:text-cream">Browse Our Fresh Creations</h3>
+                    <p class="text-gray-500 text-xs">Filter through our high-tier traditional stone-ground brews, specialty espresso cups, organic dessert treats, and discounted combos.</p>
+                </div>
+
+                <!-- Live Search and Dynamic Categories Controls -->
+                <div class="max-w-4xl mx-auto mb-10 space-y-4">
+                    <!-- Search Input Bar -->
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" id="menu-search" oninput="filterMenuItems()" placeholder="Search matcha lattes, roasted flat whites, mochi treats..." class="w-full pl-12 pr-4 py-3 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-xl focus:outline-none focus:border-matcha transition-colors text-sm shadow-sm">
+                    </div>
+
+                    <!-- Category Filter Buttons -->
+                    <div class="flex flex-wrap items-center justify-center gap-2" id="filter-buttons-container">
+                        <button onclick="setMenuFilter('all')" class="menu-filter-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wide transition-all bg-matcha text-white" data-filter="all">All Items</button>
+                        <button onclick="setMenuFilter('matcha')" class="menu-filter-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wide transition-all bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 text-gray-600 dark:text-neutral-300 hover:bg-matcha/5" data-filter="matcha">Matcha Drinks</button>
+                        <button onclick="setMenuFilter('coffee')" class="menu-filter-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wide transition-all bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 text-gray-600 dark:text-neutral-300 hover:bg-matcha/5" data-filter="coffee">Coffee Drinks</button>
+                        <button onclick="setMenuFilter('desserts')" class="menu-filter-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wide transition-all bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 text-gray-600 dark:text-neutral-300 hover:bg-matcha/5" data-filter="desserts">Desserts</button>
+                        <button onclick="setMenuFilter('combos')" class="menu-filter-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wide transition-all bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 text-gray-600 dark:text-neutral-300 hover:bg-matcha/5" data-filter="combos">Special Combos</button>
+                    </div>
+                </div>
+
+                <!-- Dynamic Grid for Menu Cards -->
+                <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Populated dynamically via javascript -->
+                </div>
+
+                <!-- Empty state for search and filtering results -->
+                <div id="no-results" class="hidden text-center py-20">
+                    <div class="w-20 h-20 rounded-full bg-gray-100 dark:bg-neutral-800 flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-mug-hot text-gray-400 text-2xl"></i>
+                    </div>
+                    <h4 class="font-heading text-xl font-bold mb-1">No items found</h4>
+                    <p class="text-sm text-gray-500 max-w-sm mx-auto">Try refining your keyword query or switching categories. Every organic treat can be customized upon request!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PROMOTIONS PAGE -->
+        <section id="tab-promo" class="tab-content fade-in hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="text-center max-w-xl mx-auto mb-10 space-y-2">
+                    <span class="font-accent text-3xl text-matcha">Sweet Deals</span>
+                    <h3 class="font-heading text-4xl font-bold text-coffee dark:text-cream">Promotions & Limited Offers</h3>
+                    <p class="text-gray-500 text-xs">Unlock exclusive benefits, seasonal savings, scratch discount coupons, and daily buy-one-get-one-free café specials.</p>
+                </div>
+
+                <!-- Running Countdown Timer Banner -->
+                <div class="bg-gradient-to-r from-coffee to-coffee-dark dark:from-neutral-900 dark:to-neutral-950 text-white p-8 sm:p-12 rounded-3xl mb-12 shadow-lg relative overflow-hidden border border-coffee/20">
+                    <!-- Decorative Whisk Background SVG -->
+                    <div class="absolute right-0 bottom-0 opacity-10 translate-y-12 translate-x-12">
+                        <i class="fa-solid fa-cookie-bite text-[200px]"></i>
+                    </div>
+
+                    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-7 space-y-4">
+                            <span class="bg-matcha text-white text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-wider">Flash Promo</span>
+                            <h4 class="font-heading text-3xl sm:text-4xl font-bold">Seasonal Spring Blossom Matcha Festival</h4>
+                            <p class="text-sm text-gray-300 leading-relaxed">Save a huge 15% across all Organic Ceremonial grade teas and our iconic Espresso Fusions. Enter code <span class="text-matcha font-bold">SPRINGMATCHA</span> in your secure checkout basket before timer runs out.</p>
+                        </div>
+                        <div class="lg:col-span-5 text-center bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10">
+                            <p class="text-xs uppercase font-semibold text-matcha-light tracking-widest mb-3">Promotional Window Closes In</p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <div class="bg-black/30 p-2.5 rounded-lg">
+                                    <span id="timer-days" class="font-heading text-2xl font-bold block">02</span>
+                                    <span class="text-[10px] text-gray-400 uppercase tracking-widest">Days</span>
+                                </div>
+                                <div class="bg-black/30 p-2.5 rounded-lg">
+                                    <span id="timer-hours" class="font-heading text-2xl font-bold block">14</span>
+                                    <span class="text-[10px] text-gray-400 uppercase tracking-widest">Hours</span>
+                                </div>
+                                <div class="bg-black/30 p-2.5 rounded-lg">
+                                    <span id="timer-minutes" class="font-heading text-2xl font-bold block">35</span>
+                                    <span class="text-[10px] text-gray-400 uppercase tracking-widest">Mins</span>
+                                </div>
+                                <div class="bg-black/30 p-2.5 rounded-lg">
+                                    <span id="timer-seconds" class="font-heading text-2xl font-bold block">12</span>
+                                    <span class="text-[10px] text-gray-400 uppercase tracking-widest">Secs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Promo Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Promo 1 -->
+                    <div class="bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 rounded-3xl overflow-hidden shadow-sm flex flex-col sm:flex-row">
+                        <div class="w-full sm:w-1/2 h-52 sm:h-auto relative">
+                            <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80" alt="BOGO Matcha Treats" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 sm:w-1/2 flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <span class="text-matcha text-[11px] font-bold uppercase tracking-widest">Buy 1 Get 1 (BOGO)</span>
+                                <h4 class="font-heading text-2xl font-bold">Dessert Cozy Hours</h4>
+                                <p class="text-xs text-gray-500 leading-relaxed">Every Tuesday and Thursday between 2:00 PM - 5:00 PM, order any Signature Matcha Drink and receive a free Organic Tea Mochi or Matcha Roll slice.</p>
+                            </div>
+                            <button onclick="switchTab('menu')" class="mt-4 text-xs font-semibold text-matcha hover:text-matcha-dark transition-colors flex items-center space-x-1.5">
+                                <span>View Eligible Treats</span> <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Promo 2 -->
+                    <div class="bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 rounded-3xl overflow-hidden shadow-sm flex flex-col sm:flex-row">
+                        <div class="w-full sm:w-1/2 h-52 sm:h-auto relative">
+                            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" alt="Special Combos Deals" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 sm:w-1/2 flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <span class="text-coffee text-[11px] font-bold uppercase tracking-widest">Special Combos</span>
+                                <h4 class="font-heading text-2xl font-bold">Rise & Whisk Combo</h4>
+                                <p class="text-xs text-gray-500 leading-relaxed">Enjoy our artisanal Breakfast combo (Premium Filter Drip Coffee and Matcha Avocado Toast) with a flat 20% bundle discount applied instantly.</p>
+                            </div>
+                            <button onclick="switchTab('menu')" class="mt-4 text-xs font-semibold text-coffee dark:text-cream hover:text-matcha transition-colors flex items-center space-x-1.5">
+                                <span>Browse Combos</span> <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Copy Coupon Cards -->
+                <div class="mt-12 text-center bg-matcha-light dark:bg-neutral-900/40 border border-matcha/20 p-8 sm:p-12 rounded-3xl">
+                    <h4 class="font-heading text-2xl font-bold text-coffee dark:text-cream mb-2">Claim Your First Cup Discount Code</h4>
+                    <p class="text-xs text-gray-500 max-w-md mx-auto mb-6">First time at Matcha & Coffee? Scratch and copy this exclusive coupon code to activate an instant 10% discount during checkout.</p>
+                    
+                    <div class="inline-flex flex-col sm:flex-row items-center bg-white dark:bg-neutral-900 p-2.5 rounded-2xl shadow-sm border border-gray-100 dark:border-neutral-800 space-y-3 sm:space-y-0 sm:space-x-3">
+                        <div class="px-6 py-3 bg-matcha-light dark:bg-matcha-dark/20 text-matcha font-heading text-xl font-bold tracking-widest rounded-xl uppercase border-2 border-dashed border-matcha/30" id="coupon-display">
+                            COZYFIRST10
+                        </div>
+                        <button onclick="copyToClipboard('COZYFIRST10')" class="bg-matcha hover:bg-matcha-dark text-white px-6 py-3 rounded-xl text-sm font-semibold transition-colors flex items-center space-x-2">
+                            <i class="fa-solid fa-copy"></i> <span id="copy-btn-text">Copy Code</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: ABOUT PAGE -->
+        <section id="tab-story" class="tab-content fade-in hidden">
+            <!-- Our Story intro section -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                    <div class="space-y-6">
+                        <span class="font-accent text-3xl text-matcha">A Tale of Two Worlds</span>
+                        <h3 class="font-heading text-4xl sm:text-5xl font-bold text-coffee dark:text-cream">The Whisk meets the Bean</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                            Matcha & Coffee was born out of a deep personal journey to solve a daily urban dilemma: the perpetual cycle of high caffeine anxiety. We loved the rich, full-bodied aromatic roast of morning specialty espresso, but we craved the calm, steady, and mindful visual focus of traditional stone-ground Japanese matcha.
+                        </p>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                            Instead of forcing city dwellers to choose, we designed a minimalist sanctuary in 2024 that gracefully blends both beautiful craft heritages. From our traditional imported chasen bamboo whisks to our modern high-pressure lever espresso pull machines, we treat both drinks with absolute peak reverence.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-4 border-t border-gray-100 dark:border-neutral-800 pt-6">
+                            <div>
+                                <h4 class="font-heading text-4xl font-bold text-matcha">100%</h4>
+                                <p class="text-xs text-gray-500 uppercase font-semibold">Uji Imported Matcha</p>
+                            </div>
+                            <div>
+                                <h4 class="font-heading text-4xl font-bold text-coffee">Single</h4>
+                                <p class="text-xs text-gray-500 uppercase font-semibold">Origin Organic Bean</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 lg:mt-0 relative flex justify-center">
+                        <div class="relative w-full max-w-md h-[450px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-neutral-800">
+                            <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=800&q=80" alt="Beautiful cafe matcha whisking setup" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Team behind the Craft -->
+            <div class="bg-matcha-light dark:bg-neutral-900/40 py-20 border-y border-matcha/10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-xl mx-auto mb-16 space-y-2">
+                        <span class="font-accent text-3xl text-matcha">The Craft Creators</span>
+                        <h3 class="font-heading text-4xl font-bold text-coffee dark:text-cream">Our Expert Masters</h3>
+                        <p class="text-gray-500 text-xs">Meet the dedicated baristas and tea artisans who whisk and brew your cups with precision, love, and calming grace.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Member 1 -->
+                        <div class="bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-neutral-800 text-center p-6">
+                            <img src="/Photo/Sovannna.png" alt="Kenji Takahashi" class="w-32 h-32 rounded-full object-cover mx-auto mb-4 border-4 border-matcha-light dark:border-matcha-dark/20">
+                            <h4 class="font-heading text-2xl font-bold text-coffee dark:text-cream">Chhem Sovanna</h4>
+                            <p class="text-xs text-matcha font-semibold uppercase tracking-wider mb-2">Master Whisk Artisan</p>
+                            <p class="text-xs text-gray-500 leading-relaxed">Harbored deep inside Kyoto’s tea gardens for over 8 years learning traditional shading, stone-milling, and precise whisking ceremonies.</p>
+                        </div>
+
+                        <!-- Member 2 -->
+                        <div class="bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-neutral-800 text-center p-6">
+                            <img src="/Photo/photo_2026-04-19_21-24-15 copy.jpg" alt="Hon Vinea" class="w-32 h-32 rounded-full object-cover mx-auto mb-4 border-4 border-coffee-light dark:border-coffee-dark/20">
+                            <h4 class="font-heading text-2xl font-bold text-coffee dark:text-cream">Hon Vinea</h4>
+                            <p class="text-xs text-coffee dark:text-cream font-semibold uppercase tracking-wider mb-2">Lead Roaster & Barista</p>
+                            <p class="text-xs text-gray-500 leading-relaxed">Certified specialty coffee roaster focusing on sourcing organic, altitude-rich micro-lots. Sarah handles our daily custom espresso tuning.</p>
+                        </div>
+
+                        <!-- Member 3 -->
+                        <div class="bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-neutral-800 text-center p-6">
+                            <img src="/Photo/photo_2026-05-25_22-58-38.jpg" alt="Sreu Sokhoeurm" class="w-32 h-32 rounded-full object-cover mx-auto mb-4 border-4 border-red-50 dark:border-red-950/20">
+                            <h4 class="font-heading text-2xl font-bold text-coffee dark:text-cream">Sreu Sokhoeurm</h4>
+                            <p class="text-xs text-coffeered font-semibold uppercase tracking-wider mb-2">Matcha Pastry Chef</p>
+                            <p class="text-xs text-gray-500 leading-relaxed">Hand-creates our fresh daily organic desserts, mixing delicate French baking methods with classical sweet Japanese mochi flavors.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: CONTACT & FIND US PAGE -->
+        <section id="tab-contact" class="tab-content fade-in hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="text-center max-w-xl mx-auto mb-10 space-y-2">
+                    <span class="font-accent text-3xl text-matcha">Reach Out</span>
+                    <h3 class="font-heading text-4xl font-bold text-coffee dark:text-cream">Come Share a Cup with Us</h3>
+                    <p class="text-gray-500 text-xs">Have questions, corporate event booking requests, or wholesale inquiries? Write to us or stop by during our opening cozy hours.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <!-- Glassmorphic Contact Form (5 Cols) -->
+                    <div class="lg:col-span-5 glass-panel p-8 rounded-3xl shadow-xl relative overflow-hidden">
+                        <h4 class="font-heading text-2xl font-bold mb-4">Send a Message</h4>
+                        <form id="contact-form" onsubmit="submitContactForm(event)" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Your Full Name</label>
+                                <input type="text" id="name" required placeholder="e.g. Kenji Bennett" class="w-full px-4 py-3 bg-white/70 dark:bg-neutral-800/70 border border-gray-200/50 dark:border-neutral-700/50 rounded-xl text-sm focus:outline-none focus:border-matcha transition-colors">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Email Address</label>
+                                <input type="email" id="email" required placeholder="yourname@gmail.com" class="w-full px-4 py-3 bg-white/70 dark:bg-neutral-800/70 border border-gray-200/50 dark:border-neutral-700/50 rounded-xl text-sm focus:outline-none focus:border-matcha transition-colors">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Your Message</label>
+                                <textarea id="message" rows="4" required placeholder="I would love to inquire about hosting a private matcha tea whisking workshop..." class="w-full px-4 py-3 bg-white/70 dark:bg-neutral-800/70 border border-gray-200/50 dark:border-neutral-700/50 rounded-xl text-sm focus:outline-none focus:border-matcha transition-colors resize-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-matcha hover:bg-matcha-dark text-white py-3.5 rounded-xl font-semibold text-center transition-all shadow-md shadow-matcha/20 flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-paper-plane text-xs"></i> <span>Send Message</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Contact & Location Info (7 Cols) -->
+                    <div class="lg:col-span-7 space-y-8">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- Info Card 1 -->
+                            <div class="bg-white dark:bg-neutral-900 p-6 rounded-2xl border border-gray-100 dark:border-neutral-800 shadow-sm flex items-start space-x-4">
+                                <div class="w-10 h-10 rounded-full bg-matcha-light dark:bg-matcha-dark/20 text-matcha flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-heading text-lg font-bold text-coffee dark:text-cream">Visit Us</h5>
+                                    <p class="text-xs text-gray-500 leading-relaxed mt-1">
+                                        452 Wabi-Sabi Alleyway,<br>Kyoto District, NY 10003
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Info Card 2 -->
+                            <div class="bg-white dark:bg-neutral-900 p-6 rounded-2xl border border-gray-100 dark:border-neutral-800 shadow-sm flex items-start space-x-4">
+                                <div class="w-10 h-10 rounded-full bg-coffee-light dark:bg-coffee-dark/20 text-coffee flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-heading text-lg font-bold text-coffee dark:text-cream">Cozy Hours</h5>
+                                    <p class="text-xs text-gray-500 leading-relaxed mt-1">
+                                        Mon - Fri: 7:30 AM - 7:00 PM<br>
+                                        Sat - Sun: 8:30 AM - 8:00 PM
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Info Card 3 -->
+                            <div class="bg-white dark:bg-neutral-900 p-6 rounded-2xl border border-gray-100 dark:border-neutral-800 shadow-sm flex items-start space-x-4">
+                                <div class="w-10 h-10 rounded-full bg-red-50 dark:bg-red-950/20 text-coffeered flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-heading text-lg font-bold text-coffee dark:text-cream">Contact Line</h5>
+                                    <p class="text-xs text-gray-500 leading-relaxed mt-1">
+                                        (+855) 963 254 211 <br>
+                                        matchaandcoffee@matchacoffee.com
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Info Card 4 -->
+                            <div class="bg-white dark:bg-neutral-900 p-6 rounded-2xl border border-gray-100 dark:border-neutral-800 shadow-sm flex items-start space-x-4">
+                                <div class="w-10 h-10 rounded-full bg-matcha-light dark:bg-matcha-dark/20 text-matcha flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-circle-nodes"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-heading text-lg font-bold text-coffee dark:text-cream">Social Feeds</h5>
+                                    <p class="text-xs text-gray-500 leading-relaxed mt-1">
+                                        Follow @matcha.coffee<br>for seasonal releases.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Aesthetic Illustrative Map Holder -->
+                        <div class="relative w-full h-64 bg-white dark:bg-neutral-900 rounded-3xl overflow-hidden border border-gray-100 dark:border-neutral-800 shadow-sm">
+                            <!-- Custom Stylized Graphic SVG Map -->
+                            <svg class="absolute inset-0 w-full h-full text-gray-200 dark:text-neutral-800 fill-current" viewBox="0 0 800 300">
+                                <g opacity="0.3">
+                                    <!-- Streets Grid layout -->
+                                    <rect x="0" y="40" width="800" height="15" fill="currentColor"/>
+                                    <rect x="0" y="160" width="800" height="20" fill="currentColor"/>
+                                    <rect x="0" y="250" width="800" height="15" fill="currentColor"/>
+                                    <rect x="180" y="0" width="20" height="300" fill="currentColor"/>
+                                    <rect x="420" y="0" width="25" height="300" fill="currentColor"/>
+                                    <rect x="680" y="0" width="15" height="300" fill="currentColor"/>
+                                    <!-- Cozy Parks blocks -->
+                                    <rect x="40" y="70" width="120" height="70" rx="10" fill="#1A8218" opacity="0.15"/>
+                                    <rect x="470" y="70" width="180" height="70" rx="10" fill="#6D4E35" opacity="0.15"/>
+                                    <circle cx="280" cy="100" r="40" fill="#1A8218" opacity="0.1"/>
+                                </g>
+                                <!-- Interactive marker -->
+                                <g transform="translate(432, 170)">
+                                    <circle cx="0" cy="0" r="14" fill="#1A8218" opacity="0.3" class="animate-ping"/>
+                                    <circle cx="0" cy="0" r="8" fill="#1A8218"/>
+                                    <i class="fa-solid fa-map-pin text-matcha text-xl -translate-x-[6px] -translate-y-[24px]"></i>
+                                </g>
+                            </svg>
+                            <!-- Visual floating label -->
+                            <div class="absolute bottom-4 left-4 glass-panel px-4 py-2.5 rounded-xl flex items-center space-x-2 text-xs font-semibold shadow-sm">
+                                <i class="fa-solid fa-street-view text-matcha"></i>
+                                <span>Corner of Wabi-Sabi Alleyway & Kyoto Ave</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Custom Toast Notification System -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 glass-panel px-6 py-3.5 rounded-2xl shadow-xl border border-gray-100 dark:border-neutral-800 flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300">
+        <div id="toast-icon-wrapper" class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm">
+            <i id="toast-icon" class="fa-solid"></i>
+        </div>
+        <div>
+            <h5 id="toast-title" class="text-xs font-bold leading-none mb-0.5">Title</h5>
+            <p id="toast-msg" class="text-[11px] text-gray-500 leading-none">Sub-message</p>
+        </div>
+    </div>
+
+    <!-- Simulated Secure Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 p-4">
+        <div class="bg-white dark:bg-neutral-900 w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl relative border border-gray-100 dark:border-neutral-800 transition-transform duration-300 scale-95" id="checkout-modal-content">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-shield-halved text-matcha text-xl"></i>
+                    <h3 class="font-heading text-2xl font-bold">Secure Checkout</h3>
+                </div>
+                <button onclick="closeCheckoutModal()" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Checkout Steps or Fields -->
+            <form onsubmit="executeCheckout(event)" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="c-first" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">First Name</label>
+                        <input type="text" id="c-first" required class="w-full px-4 py-2.5 bg-gray-50 dark:bg-neutral-800 rounded-lg text-xs focus:outline-none border border-transparent focus:border-matcha">
+                    </div>
+                    <div>
+                        <label for="c-last" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Last Name</label>
+                        <input type="text" id="c-last" required class="w-full px-4 py-2.5 bg-gray-50 dark:bg-neutral-800 rounded-lg text-xs focus:outline-none border border-transparent focus:border-matcha">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="c-address" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Delivery Address</label>
+                    <input type="text" id="c-address" required placeholder="Street address, Apartment or suite number" class="w-full px-4 py-2.5 bg-gray-50 dark:bg-neutral-800 rounded-lg text-xs focus:outline-none border border-transparent focus:border-matcha">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="c-card" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Card Number</label>
+                        <input type="text" id="c-card" required placeholder="XXXX XXXX XXXX XXXX" class="w-full px-4 py-2.5 bg-gray-50 dark:bg-neutral-800 rounded-lg text-xs focus:outline-none border border-transparent focus:border-matcha">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label for="c-expiry" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Expiry</label>
+                            <input type="text" id="c-expiry" required placeholder="MM/YY" class="w-full px-4 py-2.5 bg-gray-50 dark:bg-neutral-800 rounded-lg text-xs text-center focus:outline-none border border-transparent focus:border-matcha">
+                        </div>
+                        <div>
+                            <label for="c-cvv" class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">CVV</label>
+                            <input type="password" id="c-cvv" required placeholder="***" class="w-full px-4 py-2.5 bg-gray-50 dark:bg-neutral-800 rounded-lg text-xs text-center focus:outline-none border border-transparent focus:border-matcha">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pay Button -->
+                <button type="submit" class="w-full bg-matcha hover:bg-matcha-dark text-white py-3.5 rounded-xl font-bold text-center mt-6 shadow-lg shadow-matcha/20 transition-all flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-lock text-xs"></i> <span>Pay Now</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Brand Footer -->
+    <footer class="bg-white dark:bg-neutral-900 border-t border-gray-100 dark:border-neutral-800 transition-colors py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Brand Column -->
+            <div class="space-y-4">
+                <a href="#" class="flex items-center space-x-2">
+                    <span class="text-matcha text-2xl font-bold"><i class="fa-solid fa-leaf"></i></span>
+                    <span class="text-coffee text-xl font-bold ml-1"><i class="fa-solid fa-mug-hot"></i></span>
+                    <span class="font-heading text-2xl font-bold text-coffee dark:text-cream">Matcha & Coffee</span>
+                </a>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                    Sip mindfully. A visual and tasting sanctuary crafting premium stone-ground matcha and specialty in-house roasted coffee.
+                </p>
+                <div class="flex space-x-3 text-gray-400">
+                    <a href="https://www.youtube.com/@SovannaCHHEM" class="hover:text-matcha transition-colors"><i class="fa-brands fa-youtube text-lg"></i></a>
+                    <a href="#" class="hover:text-matcha transition-colors"><i class="fa-brands fa-facebook-f text-lg"></i></a>
+                    <a href="#" class="hover:text-matcha transition-colors"><i class="fa-brands fa-pinterest-p text-lg"></i></a>
+                    <a href="https://t.me/MC_matchaandcoffee" class="hover:text-matcha transition-colors"><i class="fa-brands fa-telegram text-lg"></i></a>
+                </div>
+            </div>
+
+            <!-- Page Quick Links -->
+            <div>
+                <h5 class="font-heading text-lg font-bold text-coffee dark:text-cream mb-4">Quick Navigation</h5>
+                <ul class="space-y-2 text-xs text-gray-500">
+                    <li><button onclick="switchTab('home')" class="hover:text-matcha transition-colors">Home Landing</button></li>
+                    <li><button onclick="switchTab('menu')" class="hover:text-matcha transition-colors">Craft Menu</button></li>
+                    <li><button onclick="switchTab('promo')" class="hover:text-matcha transition-colors">Promotional Offers</button></li>
+                    <li><button onclick="switchTab('story')" class="hover:text-matcha transition-colors">Our Story & Team</button></li>
+                    <li><button onclick="switchTab('contact')" class="hover:text-matcha transition-colors">Find Us / Location</button></li>
+                </ul>
+            </div>
+
+            <!-- Quick Contacts -->
+            <div>
+                <h5 class="font-heading text-lg font-bold text-coffee dark:text-cream mb-4">Drop by Sometime</h5>
+                <ul class="space-y-2.5 text-xs text-gray-500">
+                    <li class="flex items-center space-x-2">
+                        <i class="fa-solid fa-location-dot text-matcha"></i>
+                        <span>Boreysala Oubekom Phnom Penh</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <i class="fa-solid fa-phone text-coffee"></i>
+                        <span>(+855) 963 254 211</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <i class="fa-solid fa-envelope text-matcha"></i>
+                        <span>matchaandcoffee@matchacoffee.com</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Newsletter Box -->
+            <div>
+                <h5 class="font-heading text-lg font-bold text-coffee dark:text-cream mb-4">Sip Mindfully Weekly</h5>
+                <p class="text-xs text-gray-500 leading-relaxed mb-3">Join our slow-living cozy newsletter community to receive secret menu recipes & promotions.</p>
+                <form onsubmit="subscribeNewsletter(event)" class="space-y-2">
+                    <div class="flex">
+                        <input type="email" required placeholder="Email address" class="w-full px-3 py-2 bg-gray-50 dark:bg-neutral-800 rounded-l-lg text-xs focus:outline-none focus:border-matcha border border-transparent">
+                        <button type="submit" class="bg-matcha hover:bg-matcha-dark text-white px-4 rounded-r-lg transition-colors flex items-center justify-center">
+                            <i class="fa-solid fa-paper-plane text-xs"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-6 border-t border-gray-100 dark:border-neutral-800 text-center text-[10px] text-gray-400">
+            <p>© 2026 Matcha & Coffee Co. Whisked traditionally, roasted carefully. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Script Operations for App Logic -->
+    <script>
+        // Global Café Application State
+        const state = {
+            currentTab: 'home',
+            cart: [],
+            isDarkMode: false,
+            activeMenuFilter: 'all',
+            promoApplied: null,
+            promoDiscountPercent: 0,
+            searchQuery: ''
+        };
+
+        // Static Catalog data
+        const menuData = [
+            {
+                id: 1,
+                name: "Ceremonial Uji Matcha Latte",
+                category: "matcha",
+                price: 5.95,
+                description: "Pure stone-ground organic tea whisked traditionally to vibrant green and served with velvet texture oat milk.",
+                image: "https://i.pinimg.com/1200x/45/9a/fb/459afbc3f9000c8001ab06e67549b924.jpg",
+                badge: "Premium Grade"
+            },
+            {
+                id: 2,
+                name: "Artisanal Rose Espresso",
+                category: "coffee",
+                price: 5.75,
+                description: "Double shot of single-origin light roast espresso with fresh organic milk and subtle hints of edible botanical rose extract.",
+                image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80",
+                badge: "House Special"
+            },
+            {
+                id: 3,
+                name: "Matcha Espresso Fusion",
+                category: "matcha",
+                price: 6.45,
+                description: "A mesmerizing aesthetic layer of organic matcha milk, artisanal vanilla syrup, capped with double espresso.",
+                image: "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=600&q=80",
+                badge: "Most Popular"
+            },
+            {
+                id: 4,
+                name: "Slow Brew Drip Coffee",
+                category: "coffee",
+                price: 4.50,
+                description: "Lightly floral single-origin filter drip poured meticulously over clean paper for zero sediments.",
+                image: "https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=600&q=80",
+                badge: "Organic Roast"
+            },
+            {
+                id: 5,
+                name: "Kyoto Sweet Matcha Cookie",
+                category: "desserts",
+                price: 3.50,
+                description: "Baked fresh daily. Crispy outer edges with soft mochi inside, packed with high-grade green tea powder.",
+                image: "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80",
+                badge: "Fresh Baked"
+            },
+            {
+                id: 6,
+                name: "Shaded Hojicha Caramel Cake",
+                category: "desserts",
+                price: 6.50,
+                description: "Slow-roasted tea powder flavor layers paired with house caramelized organic sugars and sweet vanilla glaze.",
+                image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80",
+                badge: "Artisanal"
+            },
+            {
+                id: 7,
+                name: "Rise & Whisk Combo Deal",
+                category: "combos",
+                price: 10.99,
+                description: "Cozy combo offering our Slow Brew Drip Coffee paired with a warm slice of Hojicha Caramel Cake.",
+                image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80",
+                badge: "Best Value"
+            },
+            {
+                id: 8,
+                name: "Cozy Afternoon Tea Set",
+                category: "combos",
+                price: 12.50,
+                description: "Traditional Matcha Latte accompanied by Kyoto Sweet Matcha Cookie and standard fresh Mochi.",
+                image: "https://i.pinimg.com/736x/7b/99/c3/7b99c3d9b91e34d45ea707faf85f48dc.jpg",
+                badge: "Teatime Bundle"
+            }
+        ];
+
+        // On window load transitions
+        window.onload = function() {
+            // Fake animation progress bar inside preloader loader overlay
+            const bar = document.getElementById('loader-bar');
+            bar.style.width = '100%';
+            
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.classList.add('opacity-0');
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 1000);
+
+            // Populate catalog initially
+            renderMenuGrid();
+            // Start Promo Active countdown
+            startPromoCountdown();
+        };
+
+        // Dynamic Single Page Application Navigation Router
+        function switchTab(tabId) {
+            // Hide all tab containers
+            const elements = document.getElementsByClassName('tab-content');
+            for(let i = 0; i < elements.length; i++) {
+                elements[i].classList.add('hidden');
+            }
+            
+            // Show target
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            state.currentTab = tabId;
+
+            // Remove active style classes from links
+            const navLinks = document.getElementsByClassName('nav-link');
+            for(let i = 0; i < navLinks.length; i++) {
+                navLinks[i].classList.remove('text-matcha', 'border-matcha');
+                navLinks[i].classList.add('border-transparent');
+            }
+
+            // Set current nav highlighting
+            const currentNav = document.getElementById('nav-' + tabId);
+            if(currentNav) {
+                currentNav.classList.add('text-matcha', 'border-matcha');
+                currentNav.classList.remove('border-transparent');
+            }
+
+            // Hide mobile menus
+            document.getElementById('mobile-menu').classList.add('hidden');
+            
+            // Scroll to the top securely
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle mobile drawer layout navigation
+        function toggleMobileMenu() {
+            const el = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            el.classList.toggle('hidden');
+            if(el.classList.contains('hidden')) {
+                icon.className = 'fa-solid fa-bars text-lg text-coffee dark:text-cream';
+            } else {
+                icon.className = 'fa-solid fa-xmark text-lg text-coffee dark:text-cream';
+            }
+        }
+
+        // Toggle Dark Light themes
+        function toggleTheme() {
+            state.isDarkMode = !state.isDarkMode;
+            const icon = document.getElementById('theme-icon');
+            if(state.isDarkMode) {
+                document.documentElement.classList.add('dark');
+                icon.className = 'fa-solid fa-sun text-lg text-cream';
+            } else {
+                document.documentElement.classList.remove('dark');
+                icon.className = 'fa-solid fa-moon text-lg text-coffee';
+            }
+        }
+
+        // Render dynamic menu cards to page
+        function renderMenuGrid() {
+            const grid = document.getElementById('menu-grid');
+            const noResults = document.getElementById('no-results');
+            grid.innerHTML = '';
+            
+            // Filter logic
+            const filtered = menuData.filter(item => {
+                const matchesFilter = state.activeMenuFilter === 'all' || item.category === state.activeMenuFilter;
+                const matchesSearch = item.name.toLowerCase().includes(state.searchQuery.toLowerCase()) || 
+                                      item.description.toLowerCase().includes(state.searchQuery.toLowerCase());
+                return matchesFilter && matchesSearch;
+            });
+
+            if(filtered.length === 0) {
+                noResults.classList.remove('hidden');
+                grid.classList.add('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+                grid.classList.remove('hidden');
+            }
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between transform hover:-translate-y-1";
+                card.innerHTML = `
+                    <div>
+                        <div class="h-48 relative overflow-hidden group">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <span class="absolute top-3 right-3 bg-matcha-light dark:bg-matcha-dark/60 text-matcha text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">${item.badge}</span>
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <h4 class="font-heading text-xl font-bold text-coffee dark:text-cream">${item.name}</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">${item.description}</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-2 flex items-center justify-between">
+                        <span class="font-heading text-lg font-bold text-matcha">$${item.price.toFixed(2)}</span>
+                        <button onclick="addFeaturedToCart(${item.id}, '${item.name}', ${item.price}, '${item.image}')" class="bg-matcha hover:bg-matcha-dark text-white px-4 py-2 rounded-full text-xs font-semibold transition-colors flex items-center space-x-1.5">
+                            <i class="fa-solid fa-plus text-[10px]"></i> <span>Add to Bag</span>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Set Menu Filters
+        function setMenuFilter(filterType) {
+            state.activeMenuFilter = filterType;
+            
+            // Adjust active styles for controls
+            const buttons = document.getElementsByClassName('menu-filter-btn');
+            for(let i=0; i<buttons.length; i++) {
+                const btn = buttons[i];
+                if(btn.getAttribute('data-filter') === filterType) {
+                    btn.className = "menu-filter-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wide transition-all bg-matcha text-white";
+                } else {
+                    btn.className = "menu-filter-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wide transition-all bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 text-gray-600 dark:text-neutral-300 hover:bg-matcha/5";
+                }
+            }
+            renderMenuGrid();
+        }
+
+        // Search Input change handler
+        function filterMenuItems() {
+            state.searchQuery = document.getElementById('menu-search').value;
+            renderMenuGrid();
+        }
+
+        // Shopping Cart sidebar panel visibility controls
+        function toggleCart() {
+            const panel = document.getElementById('cart-sidebar');
+            const backdrop = document.getElementById('cart-backdrop');
+            
+            if(panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    panel.classList.remove('translate-x-full');
+                    backdrop.classList.add('opacity-100');
+                }, 10);
+            } else {
+                panel.classList.add('translate-x-full');
+                backdrop.classList.remove('opacity-100');
+                setTimeout(() => {
+                    panel.classList.add('hidden');
+                    backdrop.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // Add item to global shopping basket state
+        function addFeaturedToCart(id, name, price, image) {
+            const existing = state.cart.find(item => item.id === id);
+            if(existing) {
+                existing.qty++;
+            } else {
+                state.cart.push({ id, name, price, qty: 1, image });
+            }
+            updateCartUI();
+            triggerToast("Successfully Added", `${name} added to your bag!`, "bg-matcha", "fa-check");
+        }
+
+        // Adjust quantities directly inside basket
+        function updateQty(id, change) {
+            const target = state.cart.find(item => item.id === id);
+            if(target) {
+                target.qty += change;
+                if(target.qty <= 0) {
+                    state.cart = state.cart.filter(item => item.id !== id);
+                }
+            }
+            updateCartUI();
+        }
+
+        // Recalculate financial variables and render updated cart lists
+        function updateCartUI() {
+            const itemsContainer = document.getElementById('cart-items');
+            const emptyView = document.getElementById('empty-cart-view');
+            const badge = document.getElementById('cart-badge');
+
+            // Clear dynamic elements, saving the empty state placeholder
+            itemsContainer.innerHTML = '';
+            itemsContainer.appendChild(emptyView);
+
+            let subtotal = 0;
+            let totalQty = 0;
+
+            if(state.cart.length > 0) {
+                emptyView.classList.add('hidden');
+                badge.classList.remove('hidden');
+                badge.classList.remove('scale-0');
+                badge.classList.add('scale-100');
+
+                state.cart.forEach(item => {
+                    subtotal += item.price * item.qty;
+                    totalQty += item.qty;
+
+                    const div = document.createElement('div');
+                    div.className = "flex items-center space-x-3 bg-gray-50 dark:bg-neutral-800/40 p-3 rounded-xl border border-gray-100 dark:border-neutral-800/10";
+                    div.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="w-12 h-12 rounded-lg object-cover">
+                        <div class="flex-grow">
+                            <h5 class="text-xs font-bold leading-tight line-clamp-1">${item.name}</h5>
+                            <span class="text-xs font-medium text-matcha block mt-0.5">$${item.price.toFixed(2)}</span>
+                        </div>
+                        <div class="flex items-center space-x-2 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 px-2.5 py-1 rounded-full">
+                            <button onclick="updateQty(${item.id}, -1)" class="text-gray-500 hover:text-matcha"><i class="fa-solid fa-minus text-[9px]"></i></button>
+                            <span class="text-xs font-semibold">${item.qty}</span>
+                            <button onclick="updateQty(${item.id}, 1)" class="text-gray-500 hover:text-matcha"><i class="fa-solid fa-plus text-[9px]"></i></button>
+                        </div>
+                    `;
+                    itemsContainer.appendChild(div);
+                });
+            } else {
+                emptyView.classList.remove('hidden');
+                badge.classList.add('scale-0');
+                setTimeout(() => { badge.classList.add('hidden'); }, 300);
+            }
+
+            badge.innerText = totalQty;
+
+            // Apply promocode math
+            let discountAmount = subtotal * state.promoDiscountPercent;
+            let subtotalAfterDiscount = subtotal - discountAmount;
+            let tax = subtotalAfterDiscount * 0.08;
+            let total = subtotalAfterDiscount + tax;
+
+            document.getElementById('cart-subtotal').innerText = `$${subtotal.toFixed(2)}`;
+            if(state.promoDiscountPercent > 0) {
+                document.getElementById('cart-discount-row').classList.remove('hidden');
+                document.getElementById('discount-percent').innerText = `${state.promoDiscountPercent * 100}%`;
+                document.getElementById('cart-discount').innerText = `-$${discountAmount.toFixed(2)}`;
+            } else {
+                document.getElementById('cart-discount-row').classList.add('hidden');
+            }
+            document.getElementById('cart-tax').innerText = `$${tax.toFixed(2)}`;
+            document.getElementById('cart-total').innerText = `$${total.toFixed(2)}`;
+        }
+
+        // Apply Promo codes on cart
+        function applyPromoCode() {
+            const input = document.getElementById('promo-input').value.trim().toUpperCase();
+            const msg = document.getElementById('promo-message');
+
+            if(input === 'SPRINGMATCHA') {
+                state.promoApplied = 'SPRINGMATCHA';
+                state.promoDiscountPercent = 0.15;
+                msg.innerText = "Yay! 15% discount applied successfully!";
+                msg.className = "text-xs mt-1 text-matcha font-medium block";
+            } else if (input === 'COZYFIRST10') {
+                state.promoApplied = 'COZYFIRST10';
+                state.promoDiscountPercent = 0.10;
+                msg.innerText = "Welcome! 10% discount applied successfully!";
+                msg.className = "text-xs mt-1 text-matcha font-medium block";
+            } else {
+                msg.innerText = "Oops, invalid coupon code. Try 'SPRINGMATCHA'!";
+                msg.className = "text-xs mt-1 text-coffeered font-medium block";
+            }
+            updateCartUI();
+        }
+
+        // Countdown timer implementation
+        function startPromoCountdown() {
+            let totalSecs = 172800 + 52000; // Fake sliding windows
+            setInterval(() => {
+                totalSecs--;
+                if(totalSecs <= 0) return;
+
+                const days = Math.floor(totalSecs / 86400);
+                const hours = Math.floor((totalSecs % 86400) / 3600);
+                const mins = Math.floor((totalSecs % 3600) / 60);
+                const secs = totalSecs % 60;
+
+                document.getElementById('timer-days').innerText = String(days).padStart(2, '0');
+                document.getElementById('timer-hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('timer-minutes').innerText = String(mins).padStart(2, '0');
+                document.getElementById('timer-seconds').innerText = String(secs).padStart(2, '0');
+            }, 1000);
+        }
+
+        // Copy Promo details helper
+        function copyToClipboard(text) {
+            const temp = document.createElement('textarea');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+
+            const btnText = document.getElementById('copy-btn-text');
+            btnText.innerText = "Copied! ✓";
+            triggerToast("Copied Code", `${text} saved to your clipboard.`, "bg-matcha", "fa-clipboard-check");
+            setTimeout(() => {
+                btnText.innerText = "Copy Code";
+            }, 3000);
+        }
+
+        // Secure checkout simulator modals
+        function openCheckoutModal() {
+            if(state.cart.length === 0) {
+                triggerToast("Basket is Empty", "Add some cozy brews to cart before checkout!", "bg-coffeered", "fa-triangle-exclamation");
+                return;
+            }
+            const modal = document.getElementById('checkout-modal');
+            const content = document.getElementById('checkout-modal-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeCheckoutModal() {
+            const modal = document.getElementById('checkout-modal');
+            const content = document.getElementById('checkout-modal-content');
+            modal.classList.remove('opacity-100');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Simulate complete checkout transaction
+        function executeCheckout(event) {
+            event.preventDefault();
+            closeCheckoutModal();
+            toggleCart();
+
+            // Clear cart
+            state.cart = [];
+            state.promoApplied = null;
+            state.promoDiscountPercent = 0;
+            document.getElementById('promo-input').value = '';
+            document.getElementById('promo-message').classList.add('hidden');
+            updateCartUI();
+
+            triggerToast("Order Secured!", "Thank you! We are whisking and brewing your order now.", "bg-matcha", "fa-circle-check");
+        }
+
+        // Form submission inside Contact sections
+        function submitContactForm(event) {
+            event.preventDefault();
+            const nameVal = document.getElementById('name').value;
+            triggerToast("Inquiry Received", `Thank you ${nameVal}! Our team will email you within 24 hours.`, "bg-matcha", "fa-envelope-circle-check");
+            document.getElementById('contact-form').reset();
+        }
+
+        // Newsletter trigger
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            triggerToast("Subscribed!", "Welcome to our slow-living cozy coffee space newsletter.", "bg-matcha", "fa-heart");
+            event.target.reset();
+        }
+
+        // Toast messaging trigger alerts
+        function triggerToast(title, msg, bgColor, iconClass) {
+            const el = document.getElementById('toast');
+            const bgWrapper = document.getElementById('toast-icon-wrapper');
+            const icon = document.getElementById('toast-icon');
+
+            bgWrapper.className = `w-8 h-8 rounded-full flex items-center justify-center text-white text-sm ${bgColor}`;
+            icon.className = `fa-solid ${iconClass}`;
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-msg').innerText = msg;
+
+            el.classList.remove('translate-y-24', 'opacity-0');
+            el.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                el.classList.remove('translate-y-0', 'opacity-100');
+                el.classList.add('translate-y-24', 'opacity-0');
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
